@@ -1,0 +1,11 @@
+#include EAstdlib.event
+#include "Extensions/Hack Installation.txt"
+#define FreeSpace $B2A610
+
+ORG FreeSpace
+
+ALIGN 4
+#include "StatScreen.event"
+
+
+

@@ -1,0 +1,96 @@
+
+#ifndef FreeSpace
+#define FreeSpace 0xB2A610
+ORG FreeSpace
+#endif
+
+#ifndef ItemTable
+	#define ItemTable 0x8809B10
+#endif
+
+#include "Extensions/Hack Installation.txt"
+#include "_6CDefinitions.event"
+
+ALIGN 4
+#include "src/StatScreen.lyn.event"
+
+PUSH
+	ORG 0x08894C
+	jumpToHack(StartStatScreen)
+	
+	ORG 0x087184
+	jumpToHack(MSS_DrawPage1_UnitPage)
+	
+	ORG 0x087484
+	jumpToHack(MSS_DrawPage2_ItemPage)
+	
+	ORG 0x08784C
+	jumpToHack(MSS_DrawPage3_RankPage)
+POP
+
+ALIGN 4
+new_gStatScreenDrawCallTable:
+{
+	POIN MSS_DrawPage1_UnitPage		// 0x8087184+1
+	POIN MSS_DrawPage2_ItemPage		// 0x8087484+1
+	POIN MSS_DrawPage3_RankPage		// 0x808784C+1
+	WORD 0
+}
+
+ALIGN 4
+_gProc_StatScreen:
+{
+	_6C_CALL_ROUTINE(0x808844D) 	//(gFuncMSS_SetLcd)
+	_6C_CALL_ROUTINE(0x8030185) 	//(LockGameGraphicsLogic)
+	_6C_SLEEP(0x2)
+	_6C_CALL_ROUTINE(0x80884B1) 	//(gFuncMSS_SetBgGfx)
+	_6C_CALL_ROUTINE(0x80049AD) 	//(NewGreenTextColorManager)
+	_6C_CALL_ROUTINE(DrawStatScreen)// <!>
+	_6C_NEW_CHILD(0x8A00844)
+	_6C_NEW_CHILD(0x8A00938)
+	_6C_NEW_CHILD(0x8A00978)
+	_6C_NEW_CHILD(0x8A009C8)
+	_6C_GOTO(0x1)
+	
+	_6C_LABEL(0x0)
+	_6C_CALL_ROUTINE(0x808890C+1)
+	
+	_6C_LABEL(0x1)
+	_6C_SLEEP(2)
+	_6C_LOOP_ROUTINE(gFuncMSS_Idle)
+	
+	_6C_LABEL(0xA)
+	_6C_SLEEP(2)
+	_6C_END_ALL(0x8A00844)
+	_6C_CALL_ROUTINE(0x80888B4+1)
+	_6C_CALL_ROUTINE(0x80301B9) 	//(UnlockGameGraphicsLogic)
+	_6C_CALL_ROUTINE(0x80790A5) 	//(MU_EndAll)
+	_6C_CALL_ROUTINE(0x80049D1) 	//(EndGreenTextColorManager)
+	_6C_END
+} 
+
+#define MSS_Buffer 0x2003C94
+#define MSS_BufferOffset(x,y) (MSS_Buffer+0x20*2*y+2*x)
+#define gStatScreenBuffer 0x2003BFC
+#define SSBufferText(Text) (gStatScreenBuffer+0x30+0x8*Text)
+#define MSS_TextStruct(Text,xBuffer,yBuffer,color,xStart,pStringIndexAt) "WORD SSBufferText(Text) MSS_BufferOffset(xBuffer,yBuffer); BYTE color xStart 0 0; POIN pStringIndexAt"
+#define MSS_TextStruct(Text,xBuffer,yBuffer,pStringIndexAt) "WORD SSBufferText(Text) MSS_BufferOffset(xBuffer,yBuffer); WORD 3; POIN pStringIndexAt"
+#define MSS_TestStructEnd "WORD 0 0 0 0"
+
+ALIGN 4
+MSS_TextPage1:
+{
+	//MSS_TextStruct($1, $D,$5, 	0x8A0116C)	// Skill
+	MSS_TextStruct($2, $D,$7,	0x8A01170)	// 
+	MSS_TextStruct($3, $D,$9,	0x8A0117C)
+	MSS_TextStruct($4, $D,$B,	0x8A01174)
+	MSS_TextStruct($5, $D,$D,	0x8A01178)
+	MSS_TextStruct($6, $15,$3,	0x8A01188)
+	MSS_TextStruct($7, $15,$5,	0x8A01180)
+	MSS_TextStruct($8, $15,$7,	0x8A01184)
+	MSS_TextStruct($9, $15,$9,	0x8A0118C)
+	MSS_TextStruct($A, $15,$B,	0x8A01190)
+	MSS_TextStruct($B, $15,$D,	0x8A011A8)
+	MSS_TestStructEnd
+}
+
