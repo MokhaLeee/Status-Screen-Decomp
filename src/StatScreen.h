@@ -19,7 +19,7 @@ struct StatScreenData{
 	/* 0x14	*/	void* CurrentHelpTextStruct;
 	/* 0x18	*/	TextHandle TextL[3];
 	/* 0x30	*/	TextHandle Text[12];
-	/* 0x90	*/	TextHandle TextItem[4];			// start: 0x2003C8C
+	/* 0x90	*/	TextHandle TextItem[5];			// start: 0x2003C8C
 	/* 0xB8	*/	TextHandle TextPage2[5];	// start: 0x2003CB4
 };
 
