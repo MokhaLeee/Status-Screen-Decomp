@@ -18,5 +18,7 @@ Read [C-Tutorial by StanH](https://feuniverse.us/t/guide-doc-asm-hacking-in-c-wi
 - Open Msys2 bash and cd folder `src`.
 - `sh build.sh`!
 
+首先需要将lyn组件放进/src/Tools文件夹里。剩下的步骤和我之前发在B站的[编译视频（P2）](https://www.bilibili.com/video/BV1hq4y1P7am) 是一致的。
+
 
  
