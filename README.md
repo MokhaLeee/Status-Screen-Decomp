@@ -20,5 +20,8 @@ Read [C-Tutorial by StanH](https://feuniverse.us/t/guide-doc-asm-hacking-in-c-wi
 
 首先需要将lyn组件放进/src/Tools文件夹里。剩下的步骤和我之前发在B站的[编译视频（P2）](https://www.bilibili.com/video/BV1hq4y1P7am) 是一致的。
 
+## 一些碎碎念
+- 整个界面展示都是采用tile来做的，其中在绘制字串和Icon的过程，控制的x与y都对应的是8*8的格子。
+- gpStatScreenPageBg0Map与gpStatScreenPageBg2Map都是[][0x20]的数组，20H->32D，相当于一行对应0x20*0x8=0x100=256个点。
 
  
