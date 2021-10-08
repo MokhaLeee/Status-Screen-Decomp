@@ -22,6 +22,6 @@ Read [C-Tutorial by StanH](https://feuniverse.us/t/guide-doc-asm-hacking-in-c-wi
 
 ## 一些碎碎念
 - 整个界面展示都是采用tile来做的，其中在绘制字串和Icon的过程，控制的x与y都对应的是8*8的格子。
-- gpStatScreenPageBg0Map与gpStatScreenPageBg2Map都是[][0x20]的数组，20H->32D，相当于一行对应0x20*0x8=0x100=256个点。
+- gpStatScreenPageBg0Map与gpStatScreenPageBg2Map都是[][0x20]的数组，20H->32D，相当于一行对应0x20*0x8=0x100=256个点。 
 
  
